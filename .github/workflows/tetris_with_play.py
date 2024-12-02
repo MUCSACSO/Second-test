@@ -25,8 +25,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install pygame
 
     # Step 4: Run the Tetris script
     - name: Run Tetris Game
-      run: python tetris_with_play.py
+      run: |
+        python tetris.py
