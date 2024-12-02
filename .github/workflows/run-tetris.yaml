@@ -1,10 +1,10 @@
-name: Run Tetris Script
+name: Tetris Game with Play Button
 
 on:
   push:
     branches:
-      - main  # Runs when changes are pushed to the main branch
-  workflow_dispatch:  # Allows manual triggering from the GitHub Actions UI
+      - main  # Run when code is pushed to the main branch
+  workflow_dispatch:  # Allow manual triggering from the GitHub Actions UI
 
 jobs:
   run-tetris:
@@ -27,6 +27,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # Step 4: Run the script
-    - name: Run Tetris
-      run: python tetris.py
+    # Step 4: Run the Tetris script
+    - name: Run Tetris Game
+      run: python tetris_with_play.py
