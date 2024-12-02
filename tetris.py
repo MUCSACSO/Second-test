@@ -85,11 +85,10 @@ def draw_board(board, tetrimino, offset):
 def start_screen():
     while True:
         screen.fill(BLACK)
-        font = pygame.font.Font(None, 50)
-        text = font.render("Play Tetris", True, WHITE)
         button_rect = pygame.Rect(WIDTH // 4, HEIGHT // 2 - 25, WIDTH // 2, 50)
         pygame.draw.rect(screen, BLUE, button_rect)
-        screen.blit(text, (button_rect.x + 20, button_rect.y + 10))
+        text_color = WHITE
+        pygame.draw.rect(screen, text_color, button_rect, width=3)
 
         pygame.display.flip()
 
