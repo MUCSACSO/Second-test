@@ -1,3 +1,6 @@
+import os
+os.environ["SDL_AUDIODRIVER"] = "dummy"  # Disable audio driver
+
 import pygame
 import random
 
@@ -87,9 +90,6 @@ def start_screen():
         screen.fill(BLACK)
         button_rect = pygame.Rect(WIDTH // 4, HEIGHT // 2 - 25, WIDTH // 2, 50)
         pygame.draw.rect(screen, BLUE, button_rect)
-        text_color = WHITE
-        pygame.draw.rect(screen, text_color, button_rect, width=3)
-
         pygame.display.flip()
 
         for event in pygame.event.get():
