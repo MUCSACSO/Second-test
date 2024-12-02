@@ -14,6 +14,7 @@ GRID_HEIGHT = HEIGHT // BLOCK_SIZE
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GRAY = (50, 50, 50)
+BLUE = (0, 0, 255)
 COLORS = [
     (255, 0, 0),   # Red
     (0, 255, 0),   # Green
@@ -45,9 +46,6 @@ FPS = 10
 # Functions to rotate shapes
 def rotate_clockwise(shape):
     return [list(row) for row in zip(*shape[::-1])]
-
-def rotate_counterclockwise(shape):
-    return [list(row) for row in zip(*shape)][::-1]
 
 # Draw the grid
 def draw_grid():
@@ -82,6 +80,26 @@ def draw_board(board, tetrimino, offset):
                         color,
                         ((x + offset[0]) * BLOCK_SIZE, (y + offset[1]) * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)
                     )
+
+# Display the start screen with a play button
+def start_screen():
+    while True:
+        screen.fill(BLACK)
+        font = pygame.font.Font(None, 50)
+        text = font.render("Play Tetris", True, WHITE)
+        button_rect = pygame.Rect(WIDTH // 4, HEIGHT // 2 - 25, WIDTH // 2, 50)
+        pygame.draw.rect(screen, BLUE, button_rect)
+        screen.blit(text, (button_rect.x + 20, button_rect.y + 10))
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if button_rect.collidepoint(event.pos):
+                    return  # Exit the start screen and begin the game
 
 # Check if a position is valid
 def valid_position(board, shape, offset):
@@ -137,10 +155,6 @@ def main():
                     new_shape = rotate_clockwise(current_shape)
                     if valid_position(board, new_shape, offset):
                         current_shape = new_shape
-                elif event.key == pygame.K_DOWN:  # Rotate counterclockwise
-                    new_shape = rotate_counterclockwise(current_shape)
-                    if valid_position(board, new_shape, offset):
-                        current_shape = new_shape
 
         # Move down automatically
         new_offset = [offset[0], offset[1] + 1]
@@ -165,4 +179,5 @@ def main():
     pygame.quit()
 
 if __name__ == "__main__":
+    start_screen()
     main()
